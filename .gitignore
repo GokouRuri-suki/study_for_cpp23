@@ -1,0 +1,14 @@
+.
+build/
+dist/
+obj/
+*.o
+*.a
+*.so
+*.dylib
+*.lib
+*.dll
+*.exe
+*.pdb
+*.map
+*.pdb
