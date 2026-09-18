@@ -1,4 +1,9 @@
 cmake_minimum_required(VERSION 4.3)
+
+# 编译器与 flags 必须在 project() 之前设置,
+# 否则 CMake 检测阶段会选错 libstdc++ 的 std 模块导致报错
+set(CMAKE_CXX_COMPILER clang++)
+set(CMAKE_CXX_FLAGS "-stdlib=libc++")
 project(ProjectName CXX)
 
 set(CMAKE_CXX_STANDARD 23)
@@ -15,9 +20,9 @@ if(PROJECT_MODULES)
     target_sources(ProjectName PUBLIC FILE_SET CXX_MODULES FILES ${PROJECT_MODULES})
 endif()
 
-# 头文件目录:models/ 放自己的库,include/ 放第三方的
+# 头文件目录:modules/ 放自己的库,include/ 放第三方的
 target_include_directories(ProjectName PRIVATE
-    ${CMAKE_CURRENT_SOURCE_DIR}/models
+    ${CMAKE_CURRENT_SOURCE_DIR}/modules
     ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
 

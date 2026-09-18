@@ -1,0 +1,3 @@
+{
+  "clangd.arguments": ["--experimental-modules-support", "--header-insertion=never"]
+}
