@@ -1,19 +1,15 @@
 import std;
-import utils;
+import mystl;
 
 int main() {
-  std::print("Hello World!\n");
+  std::println("Hello, World!");
+  std::vector<int> vec={1,2,3,4,5,6,7,8,9,10};
+  io::ls_println(vec);
+  int a=1;
+  io::test(a);
+  
+ 
 
-  int size {0};
-  std::cin>>size;
-  std::vector<int> vec;
-  for(int i = 0; i < size; i++){ 
-    int num;
-    std::cin>>num;
-    vec.push_back(num);
-  }
-  std::print("yes\n");
-  list_print(vec);
 
   return 0;
 }
