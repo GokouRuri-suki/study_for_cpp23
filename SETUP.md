@@ -65,6 +65,20 @@ VS Code 里直接点 CMake Tools 的 Build 按钮也可(自动识别 presets)。
 | `bits/stdc++.h file not found` (扫描 std.cc 时) | `-stdlib=libc++` 设在 `project()` 之后,CMake 检测阶段选错了 libstdc++ 的 std 模块 |
 | `unrecognized command-line option '-stdlib=libc++'` | 默认用了 g++,需在 `project()` 前 `set(CMAKE_CXX_COMPILER clang++)` |
 | `modules are not supported by this generator` | 用了 Makefiles 生成器,必须 Ninja(走 presets) |
-| `import std;` 标红但编译能过 | clangd 实验性模块支持的已知限制;重启 clangd(Ctrl+Shift+P → Restart language server)后以编译结果为准 |
+| `import std;` 标红且报 `... older format that is no longer supported` | clangd 与 clang++ **版本不一致**(如 clangd 23 vs clang++ 22)。让 clangd==clang++ 大版本并开 `--experimental-modules-support` 即可(详见 §7) |
 | `export models` / `models math_utils` 之类语法错 | 关键字是 `module`,拼错会导致整个模块失效 |
+
+## 7. 为什么 `import std;` 会报错,以及修复原理
+
+一句话:不是代码错,是 **clangd 和编译用的 clang++ 版本不一致**,导致 clangd 读不懂 clang++ 生成的模块缓存(.bmi/.pcm)。
+
+1. `import std;` 的 std 不是普通头文件,而是**编译期预编译模块缓存**:`.bmi`(std)/`.pcm`(自定义模块),由 clang++ 构建时生成。
+2. 这些缓存文件带 **clang++ 22.x 的格式戳**。
+3. 若编辑器/服务器用 **clangd 23**,去读 v22 格式缓存 → `module file '...bmi' uses an older format that is no longer supported` → 无法理解 `std::vector` 等 → `import std;` 满屏红线。
+4. 修复:让 clangd 与 clang++ **同一版本**(都用系统 22),并开模块参数:
+   - `--experimental-modules-support` — 开启 C++20/23 模块解析
+   - `--query-driver=/usr/bin/clang++` — 与编译同一编译器族,匹配编译参数
+   - `--background-index` / `--header-insertion=never` — 加载/误报更稳
+5. **原则:全链路(clang++/libc++/clangd,调试则加 LLDB)同 LLVM 家族,clangd==clang++ 大版本。**
+6. 更换 clang++ 大版本后,删除 build/ 重编(旧 .bmi/.pcm 失效);clangd 版本对齐后 `import std;` 即不再报错。(同法适用于 nvim 的 clangd 配置)
 

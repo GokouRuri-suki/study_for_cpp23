@@ -1,0 +1,41 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug CMake (clang)",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/ProjectName",
+      "cwd": "${workspaceFolder}",
+      "preLaunchTask": "build-cmake",
+      "MIMode": "gdb"
+    },
+    {
+      "name": "Debug C++ file (g++)",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/out_gpp",
+      "cwd": "${workspaceFolder}",
+      "preLaunchTask": "build-gpp",
+      "MIMode": "gdb"
+    },
+    {
+      "name": "Debug C++ file (clang++)",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/out_clang",
+      "cwd": "${workspaceFolder}",
+      "preLaunchTask": "build-clang",
+      "MIMode": "gdb"
+    },
+    {
+      "name": "Debug C file (gcc)",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/out_c",
+      "cwd": "${workspaceFolder}",
+      "preLaunchTask": "build-c",
+      "MIMode": "gdb"
+    }
+  ]
+}

@@ -2,31 +2,32 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "reconfigure-modules",
-      "type": "shell",
-      "command": "cmake",
-      "args": ["-B", "build"],
-      "options": {
-        "cwd": "${workspaceFolder}"
-      },
-      "problemMatcher": [],
-      "presentation": {
-        "reveal": "silent",
-        "panel": "shared"
-      }
-    },
-    {
-      "label": "build",
+      "label": "build-cmake",
       "type": "shell",
       "command": "cmake",
       "args": ["--build", "build"],
-      "options": {
-        "cwd": "${workspaceFolder}"
-      },
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
+      "group": { "kind": "build", "isDefault": true },
+      "problemMatcher": []
+    },
+    {
+      "label": "build-gpp",
+      "type": "shell",
+      "command": "g++",
+      "args": ["-std=c++23", "-g", "${file}", "-o", "out_gpp"],
+      "problemMatcher": []
+    },
+    {
+      "label": "build-clang",
+      "type": "shell",
+      "command": "clang++",
+      "args": ["-std=c++23", "-stdlib=libc++", "-g", "${file}", "-o", "out_clang"],
+      "problemMatcher": []
+    },
+    {
+      "label": "build-c",
+      "type": "shell",
+      "command": "gcc",
+      "args": ["-std=c17", "-g", "${file}", "-o", "out_c"],
       "problemMatcher": []
     }
   ]
