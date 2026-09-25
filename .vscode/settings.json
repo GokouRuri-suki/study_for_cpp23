@@ -1,3 +1,13 @@
 {
-  "clangd.arguments": ["--experimental-modules-support", "--header-insertion=never"]
+  "clangd.arguments": [
+    "--experimental-modules-support",
+    "--header-insertion=never"
+  ],
+  "workbench.colorCustomizations": {
+    "editorCursor.foreground": "#ef857d",
+    "activityBarBadge.background": "#e9dbb7",
+    "activityBarBadge.foreground": "#262626",
+    "statusBar.background": "#9f5a51",
+    "statusBar.foreground": "#e9dbb7"
+  }
 }

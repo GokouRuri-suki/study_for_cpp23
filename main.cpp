@@ -1,13 +1,8 @@
 import std;
 import mystl;
-
+import myclass;
 int main() {
-  std::println("Hello, World!");
-  std::vector<int> vec = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-  io::ls_println(vec);
-  int a = 1;
-  io::test(a);
-  std::println("1234567890");
-
-  return 0;
+  dog dog1("小黄", "F", 123);
+  dog1.bark();
+  dog1.get_info();
 }
