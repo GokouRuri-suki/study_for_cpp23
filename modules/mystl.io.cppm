@@ -1,14 +1,13 @@
 export module mystl:io;
 import std;
 
-export namespace io{
-  template <typename T>
-  void ls_println(T&& ls){
-    for(auto&& i:ls){
-       std::print("{} ",i);
-    }
-    std::println();
+export namespace io {
+template <typename T> void ls_println(T &&ls) {
+  for (auto &&i : ls) {
+    std::print("{} ", i);
   }
-  void test(int a);
-
+  std::println();
 }
+void test(int a);
+
+} // namespace io
