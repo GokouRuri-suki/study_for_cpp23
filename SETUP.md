@@ -53,7 +53,6 @@ mkdir -p 新项目/{modules,include}   # modules/ 放自己的模块,include/ �
 4. 配置 + 编译 + 运行:
 
 ```bash
-cmake --preset default && cmake --build --preset default && ./build/项目名
 ```
 
 VS Code 里直接点 CMake Tools 的 Build 按钮也可(自动识别 presets)。
