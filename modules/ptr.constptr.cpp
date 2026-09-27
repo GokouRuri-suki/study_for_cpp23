@@ -1,5 +1,6 @@
 module ptr;
 import std;
+namespace constptr {
 void how_to_use_constptr() {
   /**
    * @note const对ptr在c语境下的机制
@@ -22,9 +23,22 @@ void how_to_use_constptr() {
   // 分析：const无视那么第一个const右边是*ptr4第二个是ptr
   // 自然是都不可变
   int const *const ptr4{nullptr};
-
   delete pp;
   delete pp2;
 
   return;
 }
+void how_to_use_constptr_of_ref() {
+  /**
+   *@note顺便写一下ref
+   *ref默认是常量指针不可更改引用的那种
+   *
+   */
+  int x{10};
+  int y{5};
+  int &xRef{x};
+  int &yRef{y};
+  xRef = yRef;
+  std::print("xRef = {},yRef = {}", xRef, yRef);
+};
+}; // namespace constptr
