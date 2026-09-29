@@ -23,7 +23,6 @@ public:
   virtual void who();
   void get_info();
 };
-
 export class cat : public animal {
 public:
   cat(std::string name, std::string sex, int age);
